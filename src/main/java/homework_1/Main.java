@@ -8,7 +8,7 @@ public class Main {
                 "Программа поможет исследовать ваше гениалогическое древо. " +
                 "Для прерывания программы введите \"exit\"."
         );
-        FamilyTree tree = new FamilyTree();
+        ResearchTree currentTree = new ResearchTree();
         while(true) {
             Person person = personInput(
                     "Введите данные персоны(имя фамилия):"
@@ -19,13 +19,13 @@ public class Main {
             Person mother = personInput(String.format(
                     "Введите данные матери персоны %s(имя фамилия):", person)
             );
-            tree.append(father, person);
-            tree.append(mother, person);
+            currentTree.append(father, person);
+            currentTree.append(mother, person);
             int count = countInput(String.format("Сколько у персоны %s детей?", person));
             for (int i = 0; i < count; i++) {
                 Person child = personInput(
                         "Введите данные ребенка (имя фамилия):");
-                tree.append(person, child);
+                currentTree.append(person, child);
             }
             if (answerInput("Продолжим вводить данные персон? (y/n)")) {
                 continue;
@@ -33,8 +33,7 @@ public class Main {
             while (true) {
                 if (answerInput("Будем исследовать персон? (y/n)")) {
                     Person object = personInput("Введите данные персоны(имя фамилия): ");
-                    System.out.println(new Research(tree).searchParents(object));
-                    System.out.println(new Research(tree).searchChildren(object));
+                    currentTree.research(object);
                 } else {
                     break;
                 }
