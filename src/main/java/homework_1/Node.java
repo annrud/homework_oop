@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class Node {
     private Person person1;
-    private RelationShip relation;
+    private Relationship relation;
     private Person person2;
-    public Node(Person person1, RelationShip relation, Person person2) {
+    public Node(Person person1, Relationship relation, Person person2) {
         this.person1 = person1;
         this.relation = relation;
         this.person2 = person2;
