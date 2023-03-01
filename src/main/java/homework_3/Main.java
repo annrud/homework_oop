@@ -13,12 +13,15 @@ public class Main {
         SimpleDateFormat dayFormat = new SimpleDateFormat("d MMMM yyyy");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Date date = new Date();
-        Task task = new Task("Вымыть посуду");
+        Task task = new Task("Выключить печь");
+        LowPriority lowPriority = new LowPriority();
+        MediumPriority mediumPriority = new MediumPriority();
+        HighPriority highPriority = new HighPriority();
 
         GregorianCalendar deadline = new GregorianCalendar();
-        deadline.roll(Calendar.MONTH, +1);
-        deadline.roll(Calendar.HOUR_OF_DAY, +1);
-        deadline.roll(Calendar.MINUTE, +30);
+        deadline.roll(Calendar.MONTH, +0);
+        deadline.roll(Calendar.HOUR_OF_DAY, +0);
+        deadline.roll(Calendar.MINUTE, +10);
         Date dateDeadline = deadline.getTime();
 
         Author author = new Author("Анна", "Попова", "Владимировна");
@@ -30,7 +33,7 @@ public class Main {
                 dayFormat.format(dateDeadline),
                 timeFormat.format(dateDeadline),
                 author,
-                Priority.LOW
+                highPriority
         );
         rec.writeToFile();
         List<List<String>> records = rec.readCSVFile();

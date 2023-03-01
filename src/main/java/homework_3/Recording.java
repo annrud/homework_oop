@@ -3,20 +3,23 @@ package homework_3;
 import lombok.Getter;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 @Getter
-public class Recording{
+public class Recording<T>{
     private String day;
     private String time;
     private Task task;
     private String deadlineDay;
     private String deadlineTime;
     private Author author;
-    private Priority priority;
+    private T priority;
 
 
-    public Recording(String day, String time, Task task, String deadlineDay, String deadlineTime, Author author, Priority priority) {
+    public Recording(String day, String time, Task task, String deadlineDay, String deadlineTime, Author author, T priority) {
         this.day = day;
         this.time = time;
         this.task = task;
@@ -35,6 +38,11 @@ public class Recording{
             while (lineNumberReader.readLine() != null) {
                 lineNumber++;
             }
+            HashMap<String, String> priorityTranslate = new HashMap<>();
+            priorityTranslate.put("High", "1");
+            priorityTranslate.put("Medium", "2");
+            priorityTranslate.put("Low", "3");
+
             FileWriter writer = new FileWriter(f, true);
             StringBuilder sb = new StringBuilder();
             sb.append(lineNumber).append(";");
@@ -42,7 +50,7 @@ public class Recording{
             sb.append(this.task).append(";");
             sb.append(this.deadlineDay).append(";").append(this.deadlineTime).append(";");
             sb.append(this.author.getFullName()).append(";");
-            sb.append(this.priority.getTranslate()).append("\n");
+            sb.append(priorityTranslate.get(this.priority.toString())).append("\n");
             writer.write(sb.toString());
             writer.close();
         } catch (IOException e) {
